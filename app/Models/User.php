@@ -50,7 +50,15 @@ class User extends Authenticatable
         return Post::where('user_id', $this->id)->latest()->get();
     }
 
-    public function avatar() {
-        return 'https://i.pravatar.cc/65?u=' . $this->email;
+    public function avatar($size = 40) {
+        return 'https://i.pravatar.cc/'. $size . '?u=' . $this->email;
+    }
+
+    public function follows() {
+        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
+    }
+
+    public function follow(User $user) {
+        return $this->follows()->save($user);
     }
 }
