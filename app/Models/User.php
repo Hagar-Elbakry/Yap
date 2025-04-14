@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function timeline() {
+        return Post::where('user_id', $this->id)->latest()->get();
+    }
+
+    public function avatar() {
+        return 'https://i.pravatar.cc/65?u=' . $this->email;
+    }
 }

@@ -15,12 +15,13 @@
                       <div class="lg:flex-1 lg:mx-10" style="max-width: 700px">
                           @include('_publish-post-panel')
                           <div class="border border-gray-300 rounded-lg">
-                                @include('_post')
-                                @include('_post')
-                                @include('_post')
+                                @foreach($posts as $post)
+                                  @include('_post')
+                                @endforeach
+
                           </div>
                       </div>
-                      <div class="lg:w-1/5 bg-purple-100 rounded-lg p-4">
+                      <div class="lg:w-1/5 bg-purple-950 rounded-lg p-4">
                           @include('_friends-list')
                       </div>
                   </div>
