@@ -47,7 +47,8 @@ class User extends Authenticatable
     }
 
     public function timeline() {
-        return Post::where('user_id', $this->id)->latest()->get();
+        $friends = $this->follows()->pluck('id');
+        return Post::whereIn('user_id', $friends)->orwhere('user_id', $this->id)->latest()->get();
     }
 
     public function avatar($size = 40) {
@@ -56,6 +57,10 @@ class User extends Authenticatable
 
     public function follows() {
         return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
+    }
+
+    public function posts() {
+        return $this->hasMany(Post::class);
     }
 
     public function follow(User $user) {

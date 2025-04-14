@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-
+    public function index() {
+        return view('home',[
+            'posts' => auth()->user()->timeline()
+        ]);
+    }
     public function store(Request $request) {
         $attributes = $request->validate([
             'body' => 'required'

@@ -9,8 +9,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [HomeController::class,'index'])->name('home');
-Route::post('/posts',[PostController::class,'store'])->name('posts.store');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/posts',[PostController::class,'index'])->name('home');
+    Route::post('/posts',[PostController::class,'store'])->name('posts.store');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
