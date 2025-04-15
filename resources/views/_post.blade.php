@@ -1,6 +1,8 @@
 <div class="flex p-4 border-b border-b-gray-400">
     <div class="mr-2 flex-shrink-0">
+        <a href="{{route('profile', $post->user->name)}}">
         <img src="{{$post->user->avatar()}}" alt="" class="rounded-full mr-2">
+        </a>
     </div>
 
     <div>

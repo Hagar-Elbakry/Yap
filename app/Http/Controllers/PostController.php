@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index() {
-        return view('home',[
+        return view('posts.index',[
             'posts' => auth()->user()->timeline()
         ]);
     }
@@ -22,6 +22,6 @@ class PostController extends Controller
             'user_id' => auth()->id()
         ]);
 
-        return redirect('/home');
+        return redirect('/posts');
     }
 }

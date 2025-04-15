@@ -31,7 +31,21 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                <div class="container max-auto">
+                <div class="max-w-7xl mx-32 sm:px-6 lg:px-8">
+                    <div class="lg:flex lg:justify-between">
+                        <div class="lg:w-32">
+                            @include('_sidebar-links')
+                        </div>
+                        <div class="lg:flex-1 lg:mx-10" style="max-width: 700px">
+                                {{$slot}}
+                        </div>
+                        <div class="lg:w-1/5 w-fit h-fit bg-purple-950 rounded-lg p-4">
+                            @include('_friends-list')
+                        </div>
+                    </div>
+                </div>
+                </div>
             </main>
         </div>
     </body>

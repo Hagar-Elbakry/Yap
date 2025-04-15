@@ -66,4 +66,8 @@ class User extends Authenticatable
     public function follow(User $user) {
         return $this->follows()->save($user);
     }
+
+    public function getRouteKeyName() {
+        return 'name';
+    }
 }
