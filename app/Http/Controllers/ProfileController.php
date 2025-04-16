@@ -36,12 +36,14 @@ class ProfileController extends Controller
         $attributes = request()->validate([
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'alpha_dash' , Rule::unique('users')->ignore($user)],
-            'avatar' => ['nullable', 'file', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'avatar' => ['file', 'mimes:jpeg,png,jpg', 'max:2048'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user)],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $attributes['avatar'] = request('avatar')->store('avatars');
+        if(request('avatar')) {
+            $attributes['avatar'] = request('avatar')->store('avatars');
+        }
         $user->update($attributes);
 
         return redirect($user->path());

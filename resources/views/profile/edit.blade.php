@@ -51,7 +51,7 @@
 
             <div class="flex">
 
-            <input type="file" name="avatar" id="avatar" required class="border border-gray-400 p-2 w-full">
+            <input type="file" name="avatar" id="avatar" class="border border-gray-400 p-2 w-full">
                 <img src="{{$user->avatar}}" alt="your avatar" width="40">
             @error('avatar')
             <p class="text-red-500 text-xs mt-2">{{$message}}</p>

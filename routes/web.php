@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
@@ -22,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/{user:username}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/{user:username}', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/explore',[ExploreController::class,'index'])->name('explore');
 });
 
 require __DIR__.'/auth.php';

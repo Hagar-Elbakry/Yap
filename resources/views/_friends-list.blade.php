@@ -4,7 +4,7 @@
         <li class="mb-4">
             <div >
                 <a href="{{$user->path()}}" class="flex items-center text-sm text-white">
-                    <img src="{{$user->avatar}}" alt="" class="rounded-full mr-4">
+                    <img src="{{$user->avatar}}" alt="" class="rounded-full mr-4" style="width: 40px; height: 40px">
                     {{$user->name}}
                 </a>
 
