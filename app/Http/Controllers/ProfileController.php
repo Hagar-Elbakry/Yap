@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -31,17 +32,19 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+    public function update(User $user) {
+        $attributes = request()->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'alpha_dash' , Rule::unique('users')->ignore($user)],
+            'avatar' => ['nullable', 'file', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user)],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+        $attributes['avatar'] = request('avatar')->store('avatars');
+        $user->update($attributes);
 
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return redirect($user->path());
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,11 +18,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded =[];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -51,8 +48,10 @@ class User extends Authenticatable
         return Post::whereIn('user_id', $friends)->orwhere('user_id', $this->id)->latest()->get();
     }
 
-    public function avatar($size = 40) {
-        return 'https://i.pravatar.cc/'. $size . '?u=' . $this->email;
+    public function avatar() : Attribute {
+        return Attribute::make(
+            get: fn($value) => asset('storage/' . $value)
+        );
     }
 
 
@@ -62,7 +61,7 @@ class User extends Authenticatable
     }
 
     public function path($append = '') {
-        $path = route('profile', $this->name);
+        $path = route('profile', $this->username);
         return $append ? "{$path}/{$append}" : $path;
     }
 }

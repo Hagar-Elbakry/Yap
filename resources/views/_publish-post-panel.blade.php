@@ -2,7 +2,7 @@
     <form method="post" action="/posts">
         @csrf
         <div class="flex justify-between">
-            <img src="{{auth()->user()->avatar(65)}}" class="rounded-full mr-4" alt="your avatar">
+            <img src="{{currentUser()->avatar}}" class=" rounded-full flex-shrink-0 mr-4" style="width: 80px; height: 80px" alt="your avatar">
             <textarea name="body" class="w-full" placeholder="write something"></textarea>
         </div>
         <footer class="flex justify-end py-4">

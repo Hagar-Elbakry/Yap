@@ -1,7 +1,7 @@
 <div class="flex p-4 border-b {{$loop->last ? '' : 'border-b-gray-400'}}">
     <div class="mr-2 flex-shrink-0">
         <a href="{{$post->user->path()}}">
-        <img src="{{$post->user->avatar()}}" alt="" class="rounded-full mr-2">
+        <img src="{{$post->user->avatar}}" alt="" class="rounded-full mr-2" style="width: 50px; height: 50px">
         </a>
     </div>
 

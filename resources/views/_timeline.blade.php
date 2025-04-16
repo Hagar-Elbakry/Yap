@@ -1,6 +1,8 @@
 <div class="border border-gray-300 rounded-lg">
-    @foreach($posts as $post)
+    @forelse($posts as $post)
         @include('_post')
-    @endforeach
+    @empty
+        No Posts Yet!
+    @endforelse
 
 </div>

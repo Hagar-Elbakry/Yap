@@ -19,7 +19,7 @@
             <a class="font-bold text-lg mb-4 block" href="#">Lists</a>
         </li>
         <li>
-            <a class="font-bold text-lg mb-4 block" href="{{route('profile', auth()->user()->name)}}">Profile</a>
+            <a class="font-bold text-lg mb-4 block" href="{{route('profile', currentUser()->username)}}">Profile</a>
         </li>
         <li>
             <a class="font-bold text-lg mb-4 block" href="#">More</a>
