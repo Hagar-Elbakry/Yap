@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -19,10 +20,11 @@ class ProfileController extends Controller
     public function show(User $user) {
         return view('profile.show', compact('user'));
     }
-    public function edit(Request $request): View
+    public function edit(User $user)
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
+        Gate::authorize('edit', $user);
+        return view('profile.edit',[
+            'user' => $user
         ]);
     }
 

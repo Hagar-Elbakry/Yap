@@ -13,13 +13,10 @@
                     <p class="text-sm">Joined {{$user->created_at->diffForHumans()}}</p>
                 </div>
                 <div class="flex">
-                    <a href="" class="rounded-full border border-gray-300 py-2 px-4 text-black text-xs mr-2">Edit Profile</a>
-                    <form action="/profile/{{$user->name}}/follow" method="post">
-                        @csrf
-                        <button type="submit" class="bg-purple-950 rounded-full shadow py-2 px-4 text-white text-xs">
-                            {{auth()->user()->following($user) ? 'Unfollow Me' : 'Follow Me'}}
-                        </button>
-                    </form>
+                    @if(currentUser()->is($user))
+                    <a href="{{$user->path('edit')}}" class="rounded-full border border-gray-300 py-2 px-4 text-black text-xs mr-2">Edit Profile</a>
+                    @endif
+                    <x-follow-button :user="$user"/>
                 </div>
             </div>
             <p class="text-sm">
