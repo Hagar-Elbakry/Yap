@@ -1,6 +1,6 @@
-<div class="flex p-4 border-b border-b-gray-400">
+<div class="flex p-4 border-b {{$loop->last ? '' : 'border-b-gray-400'}}">
     <div class="mr-2 flex-shrink-0">
-        <a href="{{route('profile', $post->user->name)}}">
+        <a href="{{$post->user->path()}}">
         <img src="{{$post->user->avatar()}}" alt="" class="rounded-full mr-2">
         </a>
     </div>
