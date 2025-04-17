@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable,Followable;
+    use HasFactory, Notifiable,Followable,likable;
 
     /**
      * The attributes that are mass assignable.
@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function timeline() {
         $friends = $this->follows()->pluck('id');
-        return Post::whereIn('user_id', $friends)->orwhere('user_id', $this->id)->latest()->get();
+        return Post::whereIn('user_id', $friends)->orwhere('user_id', $this->id)->WithLikes()->latest()->get();
     }
 
     public function avatar() : Attribute {

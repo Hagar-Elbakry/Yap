@@ -27,6 +27,6 @@
             </div>
         </header>
     @include('_timeline', [
-    'posts' => $user->posts
+    'posts' => $user->posts()->WithLikes()->get()
     ])
 </x-app-layout>
