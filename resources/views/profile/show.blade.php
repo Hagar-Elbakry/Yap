@@ -8,7 +8,7 @@
         <header class="relative">
             <img src="/images/bannar.jpg" alt="" class="mb-2 w-[700px] h-[223px] rounded-md">
             <div class="flex justify-between items-center mb-4">
-                <div>
+                <div style="max-width: 270px">
                     <h2 class="font-bold text-2xl mb-0">{{$user->name}}</h2>
                     <p class="text-sm">Joined {{$user->created_at->diffForHumans()}}</p>
                 </div>
