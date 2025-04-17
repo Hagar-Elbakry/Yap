@@ -27,7 +27,7 @@
                 <svg viewBox="0 0 20 20" class="mr-2 w-3">
                     <path d="M11 20a2 2 0 0 1-2-2v-6H2a2 2 0 0 1-2-2V8l2.3-6.12A3.11 3.11 0 0 1 5 0h8a2 2 0 0 1 2 2v8l-3 7v3h-1zm6-10V0h3v10h-3z"/>
                 </svg>
-                <button type="submit" class="text-xs {{$post->isDislikedBy(currentUser()) ? 'text-blue-950' : 'text-gray-500 '}}">{{$post->dislikes ?: 0}}</button>
+                <button type="submit" class="text-xs {{$post->isDislikedBy(currentUser()) ? 'text-blue-500' : 'text-gray-500 '}}">{{$post->dislikes ?: 0}}</button>
             </div>
             </form>
         </div>
