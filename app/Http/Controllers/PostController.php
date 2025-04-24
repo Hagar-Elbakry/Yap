@@ -26,7 +26,6 @@ class PostController extends Controller
     }
 
     public function destroy(Post $post) {
-        $post = Post::where('id', $post->id)->firstOrFail();
         $post->delete();
         return back();
     }
