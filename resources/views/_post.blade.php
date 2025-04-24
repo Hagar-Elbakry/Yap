@@ -5,8 +5,20 @@
         </a>
     </div>
 
-    <div>
-        <h5 class="font-bold mb-2">{{$post->user->name}}</h5>
+    <div class="flex-1">
+
+        <div class="flex justify-between item-start">
+            <h5 class="font-bold mb-2">{{$post->user->name}}</h5>
+
+            @if($post->user->id == currentUser()->id)
+            <form action="/posts/{{$post->id}}" method="post">
+                @csrf
+                @method('DELETE')
+                <button class="text-red-600 text-sm">X</button>
+            </form>
+            @endif
+        </div>
+
 
         <p class="text-sm mb-1">{{$post->body}}</p>
         <div class="flex">

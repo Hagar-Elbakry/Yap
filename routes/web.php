@@ -12,21 +12,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => 'auth'], function() {
-    Route::get('/posts',[PostController::class,'index'])->name('home');
-    Route::post('/posts',[PostController::class,'store'])->name('posts.store');
-});
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/posts',[PostController::class,'index'])->name('home');
+    Route::post('/posts',[PostController::class,'store'])->name('posts.store');
+    Route::delete('/posts/{post}',[PostController::class,'destroy'])->name('posts.destroy');
+    Route::post('/posts/{post}/like', [PostLikesController::class, 'store'])->name('posts.like');
+    Route::delete('/posts/{post}/like', [PostLikesController::class, 'destroy'])->name('posts.dislike');
+
     Route::get('/profile/{user:username}',[ProfileController::class,'show'])->name('profile');
     Route::post('/profile/{user:username}/follow', [FollowController::class,'store'])->name('follow');
     Route::get('/profile/{user:username}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/{user:username}', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
     Route::get('/explore',[ExploreController::class,'index'])->name('explore');
-    Route::post('/posts/{post}/like', [PostLikesController::class, 'store'])->name('posts.like');
-    Route::delete('/posts/{post}/like', [PostLikesController::class, 'destroy'])->name('posts.dislike');
+
 });
 
 require __DIR__.'/auth.php';
