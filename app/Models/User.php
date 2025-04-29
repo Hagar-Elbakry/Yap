@@ -54,7 +54,11 @@ class User extends Authenticatable
         );
     }
 
-
+    public function banner() : Attribute {
+        return Attribute::make(
+            get: fn($value) => asset($value ? '/storage/'. $value : '/images/default-banner.jpg' ),
+        );
+    }
 
     public function posts() {
         return $this->hasMany(Post::class);

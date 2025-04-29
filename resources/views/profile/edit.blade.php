@@ -59,7 +59,31 @@
             </div>
         </div>
 
+        <div class="mb-6">
+            <label for="banner" class="block mb-2 uppercase font-bold text-xs text-gray-700">
+                Banner
+            </label>
 
+            <div class="flex">
+
+                <input type="file" name="banner" id="banner" class="border border-gray-400 p-2 w-full">
+                @error('banner')
+                <p class="text-red-500 text-xs mt-2">{{$message}}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <label for="bio" class="block mb-2 uppercase font-bold text-xs text-gray-700">
+                Bio
+            </label>
+
+            <input type="text" name="bio" id="bio"  class="border border-gray-400 p-2 w-full">
+
+            @error('bio')
+            <p class="text-red-500 text-xs mt-2">{{$message}}</p>
+            @enderror
+        </div>
         <div class="mb-6">
             <label for="password" class="block mb-2 uppercase font-bold text-xs text-gray-700">
                 Password

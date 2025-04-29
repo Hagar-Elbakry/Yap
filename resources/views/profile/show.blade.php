@@ -6,7 +6,7 @@
 
     </x-slot>
         <header class="relative">
-            <img src="/images/bannar.jpg" alt="" class="mb-2 w-[700px] h-[223px] rounded-md">
+            <img src="{{$user->banner}}" alt="" class="mb-2 w-[700px] h-[223px] rounded-md">
             <div class="flex justify-between items-center mb-4">
                 <div style="max-width: 270px">
                     <h2 class="font-bold text-2xl mb-0">{{$user->name}}</h2>
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <p class="text-sm">
-                Computer Science Student, Backend Developer.
+                {{$user->bio ?? ''}}
             </p>
             <div class="w-32 h-32 mx-auto -mt-16 z-10 relative">
             <img src="{{$user->avatar}}" alt="" class=" w-full h-full object-cover rounded-full mr-2 absolute" style="width: 150px; left: calc(50% - 75px); top: -100px">
