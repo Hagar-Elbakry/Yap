@@ -14,6 +14,6 @@
                 </div>
             </a>
         @endforeach
-        {{$user->links}}
+        {{$users->links()}}
     </div>
 </x-app-layout>
