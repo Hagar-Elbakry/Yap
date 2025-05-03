@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -43,10 +44,17 @@ class ProfileController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
+
         if(request('avatar')) {
+            if($user->getRawOriginal('avatar')) {
+                Storage::delete($user->getRawOriginal('avatar'));
+            }
             $attributes['avatar'] = request('avatar')->store('avatars');
         }
         if(request('banner')) {
+            if($user->getRawOriginal('banner')) {
+                Storage::delete($user->getRawOriginal('banner'));
+            }
             $attributes['banner'] = request('banner')->store('banners');
         }
 
