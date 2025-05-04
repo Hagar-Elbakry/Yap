@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserNotificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/explore',[ExploreController::class,'index'])->name('explore');
+
+    Route::get('/notifications', [UserNotificationController::class, 'show'])->name('notifications');
 
 });
 

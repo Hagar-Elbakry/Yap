@@ -48,13 +48,13 @@ class User extends Authenticatable
         return Post::whereIn('user_id', $friends)->orwhere('user_id', $this->id)->WithLikes()->latest()->get();
     }
 
-    public function avatar() : Attribute {
+    protected function avatar() : Attribute {
         return Attribute::make(
             get: fn($value) => asset($value ? '/storage/'. $value : '/images/default-avatar.jpg' ),
         );
     }
 
-    public function banner() : Attribute {
+    protected function banner() : Attribute {
         return Attribute::make(
             get: fn($value) => asset($value ? '/storage/'. $value : '/images/default-banner.jpg' ),
         );
