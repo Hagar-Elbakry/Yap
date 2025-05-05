@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\FollowController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikesController;
 use App\Http\Controllers\ProfileController;
@@ -13,14 +12,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::group(['prefix' => '/posts', 'as' => 'posts.', 'middleware' => 'auth'], function () {
+    Route::get('',[PostController::class,'index'])->name('index');
+    Route::post('',[PostController::class,'store'])->name('store');
+    Route::delete('/{post}',[PostController::class,'destroy'])->name('destroy');
+    Route::post('/{post}/like', [PostLikesController::class, 'store'])->name('like');
+    Route::delete('/{post}/like', [PostLikesController::class, 'destroy'])->name('dislike');
+});
 
 Route::middleware('auth')->group(function () {
-    Route::get('/posts',[PostController::class,'index'])->name('home');
-    Route::post('/posts',[PostController::class,'store'])->name('posts.store');
-    Route::delete('/posts/{post}',[PostController::class,'destroy'])->name('posts.destroy');
-    Route::post('/posts/{post}/like', [PostLikesController::class, 'store'])->name('posts.like');
-    Route::delete('/posts/{post}/like', [PostLikesController::class, 'destroy'])->name('posts.dislike');
+
 
     Route::get('/profile/{user:username}',[ProfileController::class,'show'])->name('profile');
     Route::post('/profile/{user:username}/follow', [FollowController::class,'store'])->name('follow');
