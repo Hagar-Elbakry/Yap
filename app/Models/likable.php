@@ -32,6 +32,26 @@ trait likable {
           $this->like($user,false);
     }
 
+  public function toggleLike($user = null) {
+        $existing = $this->likes()->where('user_id', $user ? $user->id : auth()->id())->first();
+
+        if($existing) {
+            $existing->delete();
+        } else {
+            $this->like($user);
+        }
+  }
+
+    public function toggleDislike($user = null) {
+        $existing = $this->likes()->where('user_id', $user ? $user->id : auth()->id())->first();
+
+        if($existing) {
+            $existing->delete();
+        } else {
+            $this->dislike($user);
+        }
+    }
+
     public function isLikedBy(User $user) {
         return (bool) $user->likes->where('post_id', $this->id)->where('liked', true)->count();
     }
