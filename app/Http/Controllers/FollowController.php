@@ -10,7 +10,9 @@ class FollowController extends Controller
 {
     public function store(User $user) {
         auth()->user()->toggleFollow($user);
-        $user->notify(new UserFollowed(auth()->user()));
+        if(auth()->user()->following($user)) {
+            $user->notify(new UserFollowed(auth()->user()));
+        }
         return back();
     }
 }
