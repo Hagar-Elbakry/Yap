@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Notifications\UserFollowed;
 
 trait Followable {
     public function follows() {

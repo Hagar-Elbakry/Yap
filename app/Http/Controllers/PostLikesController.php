@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Notifications\PostReacted;
-use Illuminate\Http\Request;
 
 class PostLikesController extends Controller
 {

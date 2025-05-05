@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -65,7 +65,7 @@ class User extends Authenticatable
     }
 
     public function path($append = '') {
-        $path = route('profile', $this->username);
+        $path = route('profile.show', $this->username);
         return $append ? "{$path}/{$append}" : $path;
     }
 }

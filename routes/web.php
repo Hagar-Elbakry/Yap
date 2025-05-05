@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::group(['prefix' => '/posts', 'as' => 'posts.', 'middleware' => 'auth'], function () {
     Route::get('',[PostController::class,'index'])->name('index');
@@ -20,19 +20,18 @@ Route::group(['prefix' => '/posts', 'as' => 'posts.', 'middleware' => 'auth'], f
     Route::delete('/{post}/like', [PostLikesController::class, 'destroy'])->name('dislike');
 });
 
+Route::group(['prefix' => '/profile', 'as' => 'profile.', 'middleware' => 'auth'], function () {
+    Route::get('/{user:username}',[ProfileController::class,'show'])->name('show');
+    Route::post('/{user:username}/follow', [FollowController::class,'store'])->name('follow');
+    Route::get('/{user:username}/edit', [ProfileController::class, 'edit'])->name('edit');
+    Route::patch('/{user:username}', [ProfileController::class, 'update'])->name('update');
+});
+
 Route::middleware('auth')->group(function () {
-
-
-    Route::get('/profile/{user:username}',[ProfileController::class,'show'])->name('profile');
-    Route::post('/profile/{user:username}/follow', [FollowController::class,'store'])->name('follow');
-    Route::get('/profile/{user:username}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile/{user:username}', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/explore',[ExploreController::class,'index'])->name('explore');
 
     Route::get('/notifications', [UserNotificationController::class, 'show'])->name('notifications');
-
 });
 
 require __DIR__.'/auth.php';

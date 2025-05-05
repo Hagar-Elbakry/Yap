@@ -22,7 +22,7 @@ class PostController extends Controller
             'user_id' => auth()->id()
         ]);
 
-        return redirect('/posts');
+        return redirect(route('posts.index'));
     }
 
     public function destroy(Post $post) {
