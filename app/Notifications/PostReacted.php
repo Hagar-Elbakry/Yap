@@ -50,7 +50,7 @@ class PostReacted extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'username' => $this->user->username,
+            'name' => $this->user->name,
             'post' => $this->post->body,
             'reaction' => $this->reaction
         ];

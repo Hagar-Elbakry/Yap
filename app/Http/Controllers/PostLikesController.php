@@ -11,7 +11,7 @@ class PostLikesController extends Controller
         $post->toggleLike(currentUser());
         if($post->isLikedBy(currentUser())) {
             $user = $post->user()->first();
-            $user->notify(new PostReacted($post, currentUser() ,'like'));
+            $user->notify(new PostReacted($post, currentUser() ,'liked'));
         }
         return back();
     }
@@ -20,7 +20,7 @@ class PostLikesController extends Controller
         $post->toggleDislike(currentUser());
         if($post->isDislikedBy(currentUser())) {
             $user = $post->user()->first();
-            $user->notify(new PostReacted($post, currentUser(), 'dislike'));
+            $user->notify(new PostReacted($post, currentUser(), 'disliked'));
         }
         return back();
     }
