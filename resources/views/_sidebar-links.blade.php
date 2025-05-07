@@ -1,17 +1,17 @@
 <ul>
         <li>
-            <a class="font-bold text-lg mb-4 block" href="{{route('posts.index')}}">Home</a>
+            <a class="{{ (Route::is('posts.index')) ? 'text-white bg-purple-950 ' : ''}}font-bold text-lg mb-4 block" href="{{route('posts.index')}}">Home</a>
         </li>
         <li>
-            <a class="font-bold text-lg mb-4 block" href="{{route('explore')}}">Explore</a>
-        </li>
-
-        <li>
-            <a class="font-bold text-lg mb-4 block" href="{{route('notifications')}}">Notifications</a>
+            <a class="{{ (Route::is('explore')) ? 'text-white bg-purple-950 ' : ''}}font-bold text-lg mb-4 block" href="{{route('explore')}}">Explore</a>
         </li>
 
         <li>
-            <a class="font-bold text-lg mb-4 block" href="{{route('profile.show', currentUser()->username)}}">Profile</a>
+            <a class="{{ (Route::is('notifications')) ? 'text-white bg-purple-950 ' : ''}}font-bold text-lg mb-4 block" href="{{route('notifications')}}">Notifications</a>
+        </li>
+
+        <li>
+            <a class="{{ (Route::is('profile.show',currentUser()->username)) ? 'text-white bg-purple-950 ' : ''}}font-bold text-lg mb-4 block" href="{{route('profile.show', currentUser()->username)}}">Profile</a>
         </li>
         <li>
             <form action="{{route('logout')}}" method="post">
