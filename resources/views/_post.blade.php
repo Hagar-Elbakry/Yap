@@ -19,8 +19,9 @@
             @endif
         </div>
 
-
-        <p class="text-sm mb-1">{{$post->body}}</p>
+        <a href="{{ route('posts.show', $post->id) }}">
+             <p class="text-sm mb-1">{{$post->body}}</p>
+        </a>
         <div class="flex">
             <form action="/posts/{{$post->id}}/like" method="post">
                 @csrf

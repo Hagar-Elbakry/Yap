@@ -52,6 +52,7 @@ class PostReacted extends Notification
         return [
             'name' => $this->user->name,
             'post' => $this->post->body,
+            'id'=>$this->post->id,
             'reaction' => $this->reaction
         ];
     }

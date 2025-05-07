@@ -12,6 +12,12 @@ class PostController extends Controller
             'posts' => auth()->user()->timeline()
         ]);
     }
+
+    public function show(Post $post) {
+        return view('posts.show',[
+            'post' => Post::where('id', $post->id)->withLikes()->first()
+        ]);
+    }
     public function store(Request $request) {
         $attributes = $request->validate([
             'body' => 'required'
@@ -27,6 +33,6 @@ class PostController extends Controller
 
     public function destroy(Post $post) {
         $post->delete();
-        return back();
+        return redirect(route('posts.index'));
     }
 }

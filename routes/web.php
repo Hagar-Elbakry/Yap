@@ -14,6 +14,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => '/posts', 'as' => 'posts.', 'middleware' => 'auth'], function () {
     Route::get('',[PostController::class,'index'])->name('index');
+    Route::get('/{post}',[PostController::class,'show'])->name('show');
     Route::post('',[PostController::class,'store'])->name('store');
     Route::delete('/{post}',[PostController::class,'destroy'])->name('destroy');
     Route::post('/{post}/like', [PostLikesController::class, 'store'])->name('like');
