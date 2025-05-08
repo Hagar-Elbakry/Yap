@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    use AuthorizesRequests;
     public function index() {
         return view('posts.index',[
             'posts' => auth()->user()->timeline()
@@ -32,6 +34,7 @@ class PostController extends Controller
     }
 
     public function destroy(Post $post) {
+        $this->authorize('posts.edit', $post);
         $post->delete();
         return redirect(route('posts.index'));
     }

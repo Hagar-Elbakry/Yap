@@ -10,13 +10,13 @@
         <div class="flex justify-between item-start">
             <h5 class="font-bold mb-2">{{$post->user->name}}</h5>
 
-            @if($post->user->id == currentUser()->id)
+            @can('posts.edit', $post)
             <form action="/posts/{{$post->id}}" method="post">
                 @csrf
                 @method('DELETE')
                 <button class="text-red-600 text-sm">X</button>
             </form>
-            @endif
+            @endcan
         </div>
 
         <a href="{{ route('posts.show', $post->id) }}">
