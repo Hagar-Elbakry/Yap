@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Hagar Elbakry',
+            'is_admin' => true,
             'username' => 'hagarelbakry',
             'email' => 'hagar@gmail.com',
             'email_verified_at' => now(),

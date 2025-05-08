@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PostController;
@@ -34,5 +35,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/notifications', [UserNotificationController::class, 'show'])->name('notifications');
 });
+
+Route::get('/admin',DashboardController::class)->name('admin.dashboard')->middleware(['auth', 'admin']);
 
 require __DIR__.'/auth.php';
