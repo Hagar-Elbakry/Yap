@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -28,33 +29,25 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(User $user) {
-        $attributes = request()->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', 'alpha_dash' , Rule::unique('users')->ignore($user)],
-            'avatar' => ['file', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'banner' => ['file', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'bio' => ['nullable', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user)],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+    public function update(ProfileUpdateRequest $request, User $user) {
+        Gate::authorize('edit', $user);
+        $attributes = $request->validated();
 
-
-        if(request('avatar')) {
+        if($request->hasFile('avatar')) {
             if($user->getRawOriginal('avatar')) {
                 Storage::delete($user->getRawOriginal('avatar'));
             }
-            $attributes['avatar'] = request('avatar')->store('avatars');
+            $attributes['avatar'] = $request->get('avatar')->store('avatars');
         }
-        if(request('banner')) {
+        if($request->hasFile('banner')) {
             if($user->getRawOriginal('banner')) {
                 Storage::delete($user->getRawOriginal('banner'));
             }
-            $attributes['banner'] = request('banner')->store('banners');
+            $attributes['banner'] = $request->get('banner')->store('banners');
         }
 
         if(request('bio')) {
-            $attributes['bio'] = request('bio');
+            $attributes['bio'] = $request->get('bio');
         }
         $user->update($attributes);
 

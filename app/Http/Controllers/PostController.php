@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostStoreRequest;
 use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -20,10 +21,8 @@ class PostController extends Controller
             'post' => Post::where('id', $post->id)->withLikes()->first()
         ]);
     }
-    public function store(Request $request) {
-        $attributes = $request->validate([
-            'body' => 'required'
-        ]);
+    public function store(PostStoreRequest $request, Post $post) {
+        $attributes = $request->validated();
 
         Post::create([
             'body' => $attributes['body'],
@@ -34,7 +33,7 @@ class PostController extends Controller
     }
 
     public function destroy(Post $post) {
-        $this->authorize('posts.edit', $post);
+        $this->authorize('post.delete', $post);
         $post->delete();
         return redirect(route('posts.index'));
     }

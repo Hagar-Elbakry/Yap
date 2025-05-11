@@ -78,7 +78,7 @@
                 Bio
             </label>
 
-            <input type="text" name="bio" id="bio"  class="border border-gray-400 p-2 w-full">
+            <input type="text" name="bio" id="bio" value="{{old('bio')}}" class="border border-gray-400 p-2 w-full">
 
             @error('bio')
             <p class="text-red-500 text-xs mt-2">{{$message}}</p>
@@ -110,7 +110,7 @@
 
         <div class="mb-6">
             <button type="submit" class="bg-purple-950 text-white rounded py-2 px-4 hover:bg-purple-500 mr-4">Submit</button>
-            <a href="{{$user->path()}}" class="hover:underline">Cancle</a>
+            <a href="{{$user->path()}}" class="hover:underline">Cancel</a>
         </div>
     </form>
 </x-app-layout>

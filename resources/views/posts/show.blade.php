@@ -17,7 +17,7 @@
             <div class="flex justify-between item-start">
                 <h5 class="font-bold mb-2">{{$post->user->name}}</h5>
 
-                @can('posts.edit', $post)
+                @can('post.delete', $post)
                     <form action="/posts/{{$post->id}}" method="post">
                         @csrf
                         @method('DELETE')
