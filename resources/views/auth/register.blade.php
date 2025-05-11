@@ -1,4 +1,7 @@
 <x-guest-layout>
+
+    @section('title', 'Register')
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

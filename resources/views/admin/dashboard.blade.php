@@ -1,4 +1,5 @@
 <x-app-layout>
+    @section('title', 'Dashboard')
     <x-slot name="header">
         <h1>
             <img src="/images/logo.png" alt="Yap">
