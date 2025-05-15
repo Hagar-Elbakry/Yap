@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PostController;
@@ -29,6 +30,11 @@ Route::group(['prefix' => '/profile', 'as' => 'profile.', 'middleware' => 'auth'
     Route::patch('/{user:username}', [ProfileController::class, 'update'])->name('update');
 });
 
+Route::group(['prefix' => '/admin', 'as' => 'admin.', 'middleware' => ['auth', 'admin']], function () {
+    Route::get('',DashboardController::class)->name('dashboard');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+});
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/explore',[ExploreController::class,'index'])->name('explore');
@@ -36,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/notifications', [UserNotificationController::class, 'show'])->name('notifications');
 });
 
-Route::get('/admin',DashboardController::class)->name('admin.dashboard')->middleware(['auth', 'admin']);
+
+
 
 require __DIR__.'/auth.php';
