@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\PostLikesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserNotificationController;
@@ -33,6 +34,7 @@ Route::group(['prefix' => '/profile', 'as' => 'profile.', 'middleware' => 'auth'
 Route::group(['prefix' => '/admin', 'as' => 'admin.', 'middleware' => ['auth', 'admin']], function () {
     Route::get('',DashboardController::class)->name('dashboard');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/posts', [AdminPostController::class, 'index'])->name('posts.index');
 });
 
 Route::middleware('auth')->group(function () {

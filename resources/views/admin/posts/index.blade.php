@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Users | {{config('app.name')}}</title>
+    <title>Posts | {{config('app.name')}}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -40,30 +40,28 @@
                             <thead class="text-white bg-purple-950">
                             <tr>
                                 <th class="p-2">ID</th>
-                                <th class="p-2">Name</th>
-                                <th class="p-2">Username</th>
-                                <th class="p-2">Email</th>
-                                <th class="p-2">Joined at</th>
+                                <th class="p-2">User</th>
+                                <th class="p-2">Post</th>
+                                <th class="p-2">Created at</th>
                                 <th class="p-2">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $user)
+                            @foreach($posts as $post)
                                 <tr class="bg-white shadow">
-                                    <td class="p-2">{{$user->id}}</td>
-                                    <td class="p-2">{{$user->name}}</td>
-                                    <td class="p-2">{{$user->username}}</td>
-                                    <td class="p-2">{{$user->email}}</td>
-                                    <td class="p-2">{{$user->created_at->diffForHumans()}}</td>
+                                    <td class="p-2">{{$post->id}}</td>
+                                    <td class="p-2">{{$post->user->name}}</td>
+                                    <td class="p-2">{{$post->body}}</td>
+                                    <td class="p-2">{{$post->created_at->diffForHumans()}}</td>
                                     <td class="p-2">
-                                        <a href="{{route('profile.show', $user->username)}}" class="text-gray-500 hover:underline">View</a>
+                                        <a href="{{route('posts.show', $post->id)}}" class="text-gray-500 hover:underline">View</a>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                         <div class="mt-2">
-                            {{$users->links()}}
+                            {{$posts->links()}}
                         </div>
                     </div>
                 </div>
