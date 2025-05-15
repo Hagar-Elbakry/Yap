@@ -9,7 +9,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
     <script src="http://unpkg.com/turbolinks"></script>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -33,7 +33,7 @@
             <div class="max-w-7xl mx-32 sm:px-6 lg:px-8">
                 <div class="lg:flex lg:justify-between">
                     <div class="lg:w-32">
-                        @include('admin._sidebar-links')
+                        @include('admin.shared._sidebar-links')
                     </div>
                     <div class="lg:flex-1 lg:mx-10" style="max-width: 700px">
                         <table class="table-auto w-full text-center border-separate border-spacing-y-4">
@@ -56,7 +56,8 @@
                                     <td class="p-2">{{$user->email}}</td>
                                     <td class="p-2">{{$user->created_at->diffForHumans()}}</td>
                                     <td class="p-2">
-                                        <a href="{{route('profile.show', $user->username)}}" class="text-gray-500 hover:underline">View</a>
+                                        <a href="{{route('profile.show', $user->username)}}"
+                                           class="text-gray-500 hover:underline">View</a>
                                     </td>
                                 </tr>
                             @endforeach
