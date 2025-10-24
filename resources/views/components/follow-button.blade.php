@@ -1,6 +1,6 @@
 @if(currentUser()->isNot($user))
     <div class="flex item-center space-x-2">
-        <a href="" class=" p-2 ">
+        <a wire:navigate href="{{route('chat', $user->id)}}" class=" p-2 ">
             <i class="fa-solid fa-envelope text-gray-500 hover:text-gray-700"></i>
         </a>
     </div>

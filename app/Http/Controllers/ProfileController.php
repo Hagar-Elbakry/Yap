@@ -54,4 +54,7 @@ class ProfileController extends Controller
         return redirect($user->path());
     }
 
+    public function userChat(User $user) {
+        return view('profile.chat', compact('user'));
+    }
 }

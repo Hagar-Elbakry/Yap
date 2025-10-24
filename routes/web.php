@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-
+Route::get('/chat/{user}', [ProfileController::class, 'userChat'])->name('chat');
 Route::group(['prefix' => '/posts', 'as' => 'posts.', 'middleware' => 'auth'], function () {
     Route::get('',[PostController::class,'index'])->name('index');
     Route::get('/{post}',[PostController::class,'show'])->name('show');
