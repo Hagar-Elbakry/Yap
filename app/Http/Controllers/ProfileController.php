@@ -16,7 +16,8 @@ class ProfileController extends Controller
      */
 
     public function show(User $user) {
-        return view('profile.show', compact('user'));
+        $unReadMessages = $user->unReadMessages()->count();
+        return view('profile.show', compact('user', 'unReadMessages'));
     }
     public function edit(User $user)
     {

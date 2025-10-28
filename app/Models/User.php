@@ -68,4 +68,8 @@ class User extends Authenticatable
         $path = route('profile.show', $this->username);
         return $append ? "{$path}/{$append}" : $path;
     }
+
+    public function unReadMessages() {
+        return $this->hasMany(Message::class, 'sender_id', 'id')->where('is_read', false);
+    }
 }
