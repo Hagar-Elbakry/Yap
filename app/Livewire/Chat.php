@@ -19,6 +19,7 @@ class Chat extends Component
         $this->user = $this->getUser($user->id);
         $this->senderId = Auth::user()->id;
         $this->receiverId = $user->id;
+        $this->messages = $this->getMessages();
     }
     public function render()
     {
@@ -42,5 +43,16 @@ class Chat extends Component
             'receiver_id' => $this->receiverId,
             'is_read' => false,
         ]);
+    }
+
+    public function getMessages() {
+      return Message::query()->with(['sender:id,name', 'receiver:id,name'])
+          ->where(function ($query) {
+              $query->where('sender_id', $this->senderId)->where('receiver_id', $this->receiverId);
+          })
+          ->orWhere(function ($query) {
+              $query->where('sender_id', $this->receiverId)->where('receiver_id', $this->senderId);
+          })
+          ->get();
     }
 }
