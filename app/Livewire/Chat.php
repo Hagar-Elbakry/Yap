@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Livewire;
-
 use App\Events\MessageSendEvent;
 use App\Models\Message;
 use App\Models\User;
@@ -39,6 +38,7 @@ class Chat extends Component
         $this->messages[] = $sentMessage;
        broadcast(new MessageSendEvent($sentMessage));
         $this->message = '';
+        $this->dispatch('messages-updated');
     }
 
 

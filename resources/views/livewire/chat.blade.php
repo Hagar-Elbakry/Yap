@@ -1,5 +1,5 @@
 <div>
-    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-15 overflow-y-auto mb-7 p-3">
+    <div id="chat-container" class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-15 overflow-y-auto mb-7 p-3">
     <div class="w-full">
         @foreach($messages as $message)
             @if($message->sender->id != auth()->user()->id)
@@ -70,3 +70,14 @@
     </div>
 </div>
 </div>
+<script type="module">
+    let chatContainer = document.getElementById('chat-container');
+    Livewire.on('messages-updated', () => {
+            setTimeout(() => {
+                scrollToLatestMessage();
+            }, 50);
+    });
+    function scrollToLatestMessage() {
+        window.scrollTo(0, chatContainer.scrollHeight);
+    }
+</script>
