@@ -44,7 +44,7 @@
                             <path id="icon" d="M6.05 17.6C6.05 15.3218 8.26619 13.475 11 13.475C13.7338 13.475 15.95 15.3218 15.95 17.6M13.475 8.525C13.475 9.89191 12.3669 11 11 11C9.6331 11 8.525 9.89191 8.525 8.525C8.525 7.1581 9.6331 6.05 11 6.05C12.3669 6.05 13.475 7.1581 13.475 8.525ZM19.25 11C19.25 15.5563 15.5563 19.25 11 19.25C6.44365 19.25 2.75 15.5563 2.75 11C2.75 6.44365 6.44365 2.75 11 2.75C15.5563 2.75 19.25 6.44365 19.25 11Z" stroke="#4F46E5" stroke-width="1.6" />
                         </g>
                     </svg>
-                    <input wire:model="message" class="rounded grow shrink basis-0 text-black text-xs font-medium leading-4 focus:outline-none" placeholder="Type here...">
+                    <input id="message-input" wire:keydown="userTyping" wire:model="message" class="rounded grow shrink basis-0 text-black text-xs font-medium leading-4 focus:outline-none" placeholder="Type here...">
                 </div>
                 <div class="flex items-center gap-2">
                     <svg class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -71,7 +71,21 @@
 </div>
 </div>
 <script type="module">
+    let typingTimeout = null;
     let chatContainer = document.getElementById('chat-container');
+    window.Echo.private(`chat-channel.{{$senderId}}`)
+        .listen('UserTyping', (event) => {
+            const  messageInput = document.getElementById('message-input');
+            if(messageInput) {
+                messageInput.placeholder = 'Typing....';
+            }
+            clearTimeout(typingTimeout);
+            typingTimeout = setTimeout(() => {
+                if(messageInput) {
+                    messageInput.placeholder = 'Type here....'
+                }
+            }, 2000)
+        });
     Livewire.on('messages-updated', () => {
             setTimeout(() => {
                 scrollToLatestMessage();

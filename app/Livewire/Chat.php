@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 use App\Events\MessageSendEvent;
+use App\Events\UserTyping;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -32,11 +33,13 @@ class Chat extends Component
         return User::find($userId);
     }
 
-
+    public function userTyping() {
+        broadcast(new UserTyping($this->senderId, $this->receiverId))->toOthers();
+    }
     public function sendMessage() {
         $sentMessage = $this->saveMessage();
         $this->messages[] = $sentMessage;
-       broadcast(new MessageSendEvent($sentMessage));
+       broadcast(new MessageSendEvent($sentMessage))->toOthers();
         $this->message = '';
         $this->dispatch('messages-updated');
     }
